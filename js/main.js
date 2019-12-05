@@ -1,41 +1,38 @@
 
+// const questions = [
+//     {
+//       question: "Name a bad job for someone who's accident-prone.",
+//       answers: [
+//                 {answer: "Driver", percentage: 33}, 
+//                 {answer: "Construction Worker", percentage: 20}, 
+//                 {answer: "Police Officer", percentage: 11},
+//                 {answer: "Food Service", percentage: 10}, 
+//                 {answer: "Glass Maker", percentage: 9},
+//                 {answer: "Window Washer", percentage: 7}, 
+//                 {answer: "Surgeon", percentage: 6}
+//               ]
+//     },
+//     {
+//       question: "Name something that you hang up.",
+//       answers: [
+//                 {answer: "The Phone", percentage: 54},
+//                 {answer: "Clothes", percentage: 38},
+//                 {answer: "Towel", percentage: 4},
+//                 {answer: "Picture Frame", percentage: 3}
+//       ]
+//     }
+//   ]
 
-const questions = [
-    {
-      question: "Name a bad job for someone who's accident-prone.",
-      answers: [
-                {answer: "Driver", percentage: 33}, 
-                {answer: "Construction Worker", percentage: 20}, 
-                {answer: "Police Officer", percentage: 11},
-                {answer: "Food Service", percentage: 10}, 
-                {answer: "Glass Maker", percentage: 9},
-                {answer: "Window Washer", percentage: 7}, 
-                {answer: "Surgeon", percentage: 6}
-              ]
-    },
-    {
-      question: "Name something that you hang up.",
-      answers: [
-                {answer: "The Phone", percentage: 54},
-                {answer: "Clothes", percentage: 38},
-                {answer: "Towel", percentage: 4},
-                {answer: "Picture Frame", percentage: 3}
-      ]
-    }
-  ]
+let game = new FamilyFeudGame()
 
-let theGame = new FamilyFeudGame(questions);
-
-
-
-window.addEventListener("load", event => {
-  renderQuestion(theGame.questions[0])
+window.addEventListener("load", () => {
+  renderQuestion(game.questions[0])
 });
 
 function renderQuestion(question){
     let answersHTML = "";
     for(let i = 0; i < question.answers.length; i++) {
-       answersHTML += `<p>${question.answers[i].answer}</p>`
+       answersHTML += `<p class="answer-${i}">${question.answers[i].answer}</p>`
     }
     document.getElementsByClassName("question")[0].innerHTML = `
       <div class="question">
@@ -45,14 +42,18 @@ function renderQuestion(question){
     `;
 }
 
-function revealAnswers(question){
+document.querySelector(".submit-answer").addEventListener("click", function(){
+  let answer = document.querySelector('.playerAnswer').value
+  game.checkIfRight(answer);
+  game.nextQuestion();
+})
 
-}
 
-document.querySelector(".answer").onclick = function() {
+
+//document.querySelector(".submit-answer").onclick = function() {
   // todo B
   // get value
   // check if answer is correct
   // go to next question
   // render next question
-}
+//}
